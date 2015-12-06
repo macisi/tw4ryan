@@ -2,7 +2,7 @@
 	"server": {
 		"protocol": "http",
 		"transport": "session",
-		"host": "tw4ryan.com"
+		"host": "tw4ryan.com:8082"
 	},
 	"twitter": {
 		"key": "NhPm8eTgY1xraW85DpriU95mg",

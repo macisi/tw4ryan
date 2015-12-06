@@ -9,7 +9,7 @@ function *makeApiRequest(next){
 	let params = this.params;
 	let url = Object.keys(params).map( key => params[key]).join('/');
 	if (this.session.grant) {
-		let result = yield request({
+		let reqOption = {
 			baseUrl	: 'https://api.twitter.com/1.1/',
 			method	: this.method,
 			uri		: url,
@@ -20,7 +20,11 @@ function *makeApiRequest(next){
 				token: this.session.grant.response.access_token,
 				token_secret: this.session.grant.response.access_secret
 			}
-		});
+		};
+		if (this.method.toLowerCase() === 'get' && this._parsedUrl.search) {
+			reqOption.uri += this._parsedUrl.search;
+		}
+		let result = yield request(reqOption);
 		this.body = result.body;
 	} else {
 		yield next;

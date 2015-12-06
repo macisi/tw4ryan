@@ -1,8 +1,11 @@
 module.exports = {
-    entry: './app/module/index.jsx',
+    entry: {
+		'index': './app/module/index.jsx',
+		'user': './app/module/user.jsx',
+	},
     output: {
         path: __dirname + '/assets',
-        filename: 'bundle.js'
+        filename: '[name].entry.js'
     },
     module: {
         loaders: [

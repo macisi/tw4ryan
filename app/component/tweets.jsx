@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Tweet from './tweet.jsx';
+import List from 'material-ui/lib/lists/list';
+import ListDivider from 'material-ui/lib/lists/list-divider';
 
 export default class Tweets extends React.Component {
 	constructor(props) {
@@ -20,11 +22,11 @@ export default class Tweets extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<List>
 				{this.state.list.map(d => {
-					return <Tweet key={d.id} data={d} />	
+					return <div key={d.id}><Tweet data={d} /><ListDivider inset={true} /></div>
 				})}
-			</div>
+			</List>
 		);
 	}
 }
@@ -32,6 +34,3 @@ export default class Tweets extends React.Component {
 Tweets.defaultProps = {
 	source: ''
 };
-	
-
-

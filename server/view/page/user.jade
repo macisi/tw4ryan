@@ -1,0 +1,10 @@
+// - user
+extends ../layout/default.jade
+
+block content
+	script.
+		__Config = {
+			userId: '#{user_id}'	
+		};
+	#J_Content
+	script(src="/assets/user.entry.js")

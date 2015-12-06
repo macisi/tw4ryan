@@ -6,12 +6,20 @@ module.exports = function(app){
 	const router = Router();
 	
 	router
-		.get('/', function *(next){
-			yield this.render('index');
+		.get('/', function *(next){	
+			if (this.session.grant) {
+				return yield this.render('page/index');
+			}
+			this.redirect('/connect/twitter');
+		})
+		.get('/user/:user_id', function *(next){
+			if (this.session.grant) {
+				return yield this.render('page/user', this.params);
+			}
+			this.redirect('/connect/twitter');
 		})
 		.get('/handle_facebook_callback', function *(next){
-			console.log(this.session.grant.response);
-			this.body = JSON.stringify(this.session.grant.response, null, 2);
+			this.redirect('/');
 		});
 	
 	router.use('/api', apiRouter.routes(), apiRouter.allowedMethods());
