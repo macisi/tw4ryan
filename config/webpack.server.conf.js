@@ -2,13 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
+const cwd = process.cwd();
+
 module.exports = {
-  context: path.resolve(__dirname, '../src'),
+  context: path.join(cwd, './src'),
   entry: {
-    index: './index',
+    app: './server/template/index',
   },
   output: {
-    path: path.resolve(__dirname, '../build'),
+    path: path.join(cwd, './src/server/build'),
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
@@ -25,8 +28,11 @@ module.exports = {
       },
     ],
   },
-  externals: [ nodeExternals() ],
-  devtool: 'eval-source-map',
+  externals: {
+    // 'react': 'React',
+    // 'react-dom': 'ReactDOM',
+  },
+  devtool: false,
   target: 'node',
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),

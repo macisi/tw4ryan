@@ -15,11 +15,11 @@ const middleware = () => {
           oauth: {
             consumer_key: config.tumblr.key,
             consumer_secret: config.tumblr.secret,
-            token: ctx.session.grant.request.oauth_token,
-            token_secret: ctx.session.grant.request.oauth_token_secret,
+            token: ctx.session.grant.response.access_token,
+            token_secret: ctx.session.grant.response.access_secret,
           },
         });
-        ctx.body = result.body;
+        ctx.body = result;
       } catch (err) {
         ctx.body = err.error;
       }
